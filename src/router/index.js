@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import ScrapeWebsite from '@/components/ScrapeWebsite'
+import Companies from '@/components/Companies'
 
 Vue.use(Router)
 
@@ -13,9 +13,9 @@ export default new Router({
       component: HelloWorld
     },
     {
-    	path: '/scrape',
-    	name: 'Scrape',
-    	component: ScrapeWebsite
+    	path: '/companies',
+    	name: 'Companies',
+    	component: Companies
     }
   ]
 })

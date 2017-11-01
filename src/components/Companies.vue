@@ -20,40 +20,40 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Companies',
   data () {
     return {
       msg: 'Scrape a website',
       items: [],
-      currentpage: 1,
-      lastPage: false
+      lastPage: false,
+      currentPage: 1
     }
   },
   methods: {
     loadNext(){
-      this.currentPage++;
-      this.fetchData();
+      this.fetchData(Number(this.currentPage) + 1);
     },
     loadPrevious(){
-      this.currentPage--;
-      this.fetchData();
+      if(this.lastPage == true){
+        this.lastPage = false;
+      }
+      this.fetchData(Number(this.currentPage) - 1);
     },
-    fetchData(){
-      this.$http.get('companies', {params: {page: this.currentPage}})
+    fetchData: function(pageNum){
+      this.$http.get('companies', {params: {page: pageNum}})
       .then(response => {
+        this.currentPage = response.data.currentPage;
         if(response.data.list.length==0){
-          this.currentPage--;
           this.lastPage = true;
         }
         else{
-          this.currentPage = response.data.currentPage;
           this.items = response.data.list;
         }
       });
     }
   },
   created: function () {
-    this.fetchData();
+    this.fetchData(Number(this.currentPage));
   }
 }
 </script>
