@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div class="row col-lg-12 col-lg-offset-1">
-      <div class="card col-lg-4" col-md-3 col-sm-4 v-for="item in items">
+    <div class="row col-lg-11 col-lg-offset-1">
+      <div class="card col-lg-4 col-md-6 col-sm-12" v-for="item in items">
         <div class="card-body">
+          <!--<img v-bind:src=item.logo class="logo-img" v-if="item.logo != ''"/>-->
           <h4 class="card-title">{{ item.name }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a v-bind:href=item.website class="card-link">Website</a>
-          <a v-bind:href=item.careersPage class="card-link">Careers</a>
+          <p class="card-text"><span v-if="item.location">{{ item.location }},</span> {{ item.country }}</p>
+          <div class="links-box">
+            <a v-bind:href=item.website class="card-link">Website</a>
+            <a v-bind:href=item.careersPage v-if="item.careersPage!=''" class="card-link">Careers</a>
+          </div>
         </div>
       </div>
     </div>
     <div class='pagination-block'>
-      <button class="btn btn-primary" @click="loadPrevious()" v-if="currentPage > 1">Prev</button>
-      <button class="btn btn-primary" @click="loadNext()" v-if="!lastPage">Next</button>
+      <button class="btn btn-primary" @click="loadNext()" v-if="!lastPage">Load More</button>
     </div>
   </div>
 </template>
@@ -47,7 +49,7 @@ export default {
           this.lastPage = true;
         }
         else{
-          this.items = response.data.list;
+          this.items.push.apply(this.items, response.data.list);
         }
       });
     }
@@ -76,29 +78,58 @@ li {
 
 .card {
     width: 24rem;
-    height: 220px;
+    height: 160px;
+    vertical-align: middle;
+    box-sizing: border-box;
     position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 4px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    display: inline-block;
+    margin: 8px;
+    padding:8px;
     background-color: #fff;
     border-radius: 0.30rem;
     box-shadow: 0 1px 1px #e8e8e8;
 }
 
+.card-body{
+  vertical-align: middle;
+}
+
 .card-title{
-  line-height:2;
+  line-height:1.5;
 }
 
 .pagination-block button{
   margin:16px;
+}
+
+.logo-img{
+  height: 32px;
+  margin:8px;
+}
+
+.links-box{
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right:0;
+  padding:12px;
+}
+
+.links-box a{
+  display: inline-block;
+  width: 49%;
+  padding: 4px;
+  border-radius: 16px;
+  font-size: 12px;
+  background: rgba(236, 236, 236, 0.3);
+  box-shadow: 0 1px 1px #ececec;
+  -webkit-transition: box-shadow 0.2s; /* Safari */
+  transition: box-shadow 0.2s;
+}
+
+a:hover{
+  text-decoration: none;
+  box-shadow: 0 1px 4px #c1c1c1;
 }
 
 </style>

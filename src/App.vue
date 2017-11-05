@@ -10,19 +10,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="http://yourwebsite.com/">Home</a>
+              <a class="navbar-brand" href="http://yourwebsite.com/">WorkRemotly</a>
           </div>
    
           <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                   <li class="active">
-                      <a href="#">All</a>
+                      <a href="#">Companies</a>
                   </li>
                   <li>
-                      <a href="#">Demo</a>
+                      <a href="#">Books</a>
                   </li>
                   <li>
-                      <a href="#">Contact</a>
+                      <a href="#">Articles</a>
                   </li>
               </ul>
           </div><!--/.nav-collapse -->
